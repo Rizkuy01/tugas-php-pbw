@@ -35,25 +35,11 @@
                     <th scope="col">Code Book</th>
                     <th scope="col">Name</th>
                     <th scope="col">Quantity</th>
-                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
             <?php
             require_once 'connect.php';
-            require_once 'delete.php';
-
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-            
-                // Memanggil fungsi deleteBook untuk menghapus data dari database
-                if (deleteBook($id)) {
-                    echo "<div class='alert alert-success' role='alert'>Record deleted successfully</div>";
-                } else {
-                    echo "<div class='alert alert-danger' role='alert'>Error deleting record</div>";
-                }
-            }
-            
             $sql = "SELECT code_book, name, qty FROM books";
             $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
@@ -62,7 +48,6 @@
                         echo "<td>" . $row["code_book"] . "</td>";
                         echo "<td>" . $row["name"] . "</td>";
                         echo "<td>" . $row["qty"] . "</td>";
-                        echo "<td><a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger btn-sm'>Delete</a></td>";
                         echo "</tr>";
                     }
                 } else {
